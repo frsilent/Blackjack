@@ -1,0 +1,17 @@
+#gameBoard {
+	height: 500px;
+	width: 600px;
+	margin: auto;
+	border: solid 5px green;
+	background-color: green;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+}
+.cardsHeader {
+	color: white;
+	font-size: 22px;
+	margin: 0 0 0 20px;
+}
+
