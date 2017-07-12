@@ -2,6 +2,11 @@
 body {
 	background-color: #37393d;
 }
+#bjMainHead {
+	color: white;
+	text-align: center;
+
+}
 #gameBoard {
 	height: 500px;
 	width: 600px;
@@ -36,4 +41,13 @@ body {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+#appMessages {
+	color: white;
+	font-size: 20px;
+	margin: auto;
+	width: 600px;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border: solid 5px green;
 }
