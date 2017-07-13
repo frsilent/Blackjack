@@ -12,6 +12,7 @@ var blackJackController = {
 var playerHand = [];
 var dealerHand = [];
 var playerHandValue = [];
+var dealerHandValue = [];
 
 // Deck Setup
 var GameData = {
@@ -29,51 +30,44 @@ var GameData = {
 	   
 	}
 }
-
-console.log(GameData.deck)
-
-
 GameData.buildDeck();
-// console.log(GameData.deck);
+
 
 
 // Deal a new hand
 function dealNewPlayerHand() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log(dealCards + ' new player hand function');
+	console.log('dealNewPlayerHand working');
 	for (var i = 0; i <= 1; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
-		console.log(playerHand)
+		
 	playerHandValue.push(parseInt(playerHand[i]));
 	}
 	
 	console.log(playerHandValue);
 	return dealCards;
-	
-// need to assign value of card based on the string number generated for card or face
-	
 }
 
 function dealNewDealerHand() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log("dealNewDealerHand is working");
+	console.log("dealNewDealerHand function is working");
 	for (var i = 0; i <= 1; i++) {
 		dealerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
+		
+	dealerHandValue.push(parseInt(dealerHand[i]));
 	}
 	
+	console.log(dealerHandValue);
 	return dealCards;
-	
-
-	
 }
 
 function hitPlayer() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log("hitPlayer is working");
+	console.log("hitPlayer function is working");
 	for (var i = 0; i <= 0; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
 	}
-	console.log(playerHand);
+	
 }
 
 
@@ -94,6 +88,7 @@ function newGameDeal() {
 
 function hit(){
 // checking total value of cards against other 21
+	
 	hitPlayer();
 }
 
@@ -134,5 +129,3 @@ $("#stand").click(function(){
  });
     // call stand function here
 });
-
-var randomRating = (Math.random()* 10);
