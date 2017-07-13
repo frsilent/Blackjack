@@ -1,4 +1,4 @@
-
+$(function(){
 
 // Game Setup
 
@@ -22,8 +22,11 @@ GameData.buildDeck();
 
 
 // Deal a random card
-var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-console.log(dealCards);
+function dealNewGame() {
+	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
+	console.log(dealCards);
+}
+dealNewGame();
 
 
 
@@ -36,10 +39,11 @@ console.log(dealCards);
 
 
 
+
 // // Button Event Listeners
 $("#newGame").click(function(){
     console.log("New Game Button Clicked.");
-    // call start game function here
+    // call  hit function here
 });
 $("#hit").click(function(){
     console.log("Hit Button Clicked.");
@@ -49,3 +53,4 @@ $("#stand").click(function(){
     console.log("Stand Button Clicked.");
  });
     // call stand function here
+});
