@@ -1,22 +1,37 @@
 $(function(){
 
+var blackJackController = {
+	playerCardsValue: 0,
+	dealerCardsValue: 0,
+	dealerTurn: false,
+
+}
+
+// Need to build card values and link images and store them
+
 var playerHand = [];
 var dealerHand = [];
+var playerHandValue = [];
 
 // Deck Setup
-const GameData = {
+var GameData = {
 	deck: [],
 	buildDeck: function() {
-		var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+		var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '10 J', '10 Q', '10 K', '11 A'];
 		var suits = ['Hearts','Diamonds','Spades','Clubs'];
 	    
-	    for( var s = 0; s < suits.length; s++ ) {
-	        for( var n = 0; n < names.length; n++ ) {
-	            this.deck.push(suits[s] + names[n]);
+	    for( var n = 0; n < names.length; n++ ) {
+	        for( var s = 0; s < suits.length; s++ ) {
+	            this.deck.push(names[n] + " " + suits[s]);
 	        }
 	    }
+
+	   
 	}
 }
+
+console.log(GameData.deck)
+
 
 GameData.buildDeck();
 // console.log(GameData.deck);
@@ -25,14 +40,17 @@ GameData.buildDeck();
 // Deal a new hand
 function dealNewPlayerHand() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log("dealNewPlayerHand is working");
+	console.log(dealCards + ' new player hand function');
 	for (var i = 0; i <= 1; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
+		console.log(playerHand)
+	playerHandValue.push(parseInt(playerHand[i]));
 	}
 	
+	console.log(playerHandValue);
 	return dealCards;
 	
-
+// need to assign value of card based on the string number generated for card or face
 	
 }
 
@@ -49,6 +67,16 @@ function dealNewDealerHand() {
 	
 }
 
+function hitPlayer() {
+	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
+	console.log("hitPlayer is working");
+	for (var i = 0; i <= 0; i++) {
+		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
+	}
+	console.log(playerHand);
+}
+
+
 
 // User, dealer hands, deal hand function, hit function to check for 21, stand function, check for blackjack or check for win
 
@@ -56,7 +84,7 @@ function dealNewDealerHand() {
 
 // functions new game, hit, stand
 
-function newGameReset() {
+function newGameDeal() {
 	dealNewPlayerHand();
 	dealNewDealerHand();
 	console.log("dealer hand is " + dealerHand);
@@ -66,6 +94,7 @@ function newGameReset() {
 
 function hit(){
 // checking total value of cards against other 21
+	hitPlayer();
 }
 
 function winOrLose() {
@@ -78,7 +107,7 @@ function stand() {
 
 // Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
 function createCardsOnBoard() {
-	
+
 }
 
 
@@ -93,7 +122,7 @@ function createCardsOnBoard() {
 // // Button Event Listeners
 $("#newGame").click(function(){
     console.log("New Game Button Clicked.");
-    newGameReset();
+    newGameDeal();
     // call  hit function here
 });
 $("#hit").click(function(){
