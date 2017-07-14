@@ -1,11 +1,11 @@
 $(function(){
+// Might not need a controller
+// var blackJackController = {
+// 	playerCardsValue: 0,
+// 	dealerCardsValue: 0,
+// 	dealerTurn: false,
 
-var blackJackController = {
-	playerCardsValue: 0,
-	dealerCardsValue: 0,
-	dealerTurn: false,
-
-}
+// }
 
 // Need to build card values and link images and store them
 
@@ -13,6 +13,7 @@ var playerHand = [];
 var dealerHand = [];
 var playerHandValue = [];
 var dealerHandValue = [];
+
 
 // Deck Setup
 var GameData = {
@@ -42,6 +43,8 @@ function dealNewPlayerHand() {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
 		
 	playerHandValue.push(parseInt(playerHand[i]));
+
+
 	}
 	
 	console.log(playerHandValue);
@@ -56,7 +59,7 @@ function dealNewDealerHand() {
 		
 	dealerHandValue.push(parseInt(dealerHand[i]));
 	}
-	
+	$('#appMessage').text("You have " + playerHandValue[0] + playerHandValue[1])
 	console.log(dealerHandValue);
 	return dealCards;
 }
@@ -69,10 +72,27 @@ function hitPlayer() {
 	}
 	
 }
+function sumPlayerHandValue(array) {
+	var sum = 0;
+	for (var i = 0; i < playerHandValue.length; i++) {
+	
+	sum = sum + array[i];
+	}
+	console.log("Player total is: " + sum);	
+}
+function sumDealerHandValue(array) {
+	var sum = 0;
+	for (var i = 0; i < dealerHandValue.length; i++) {
+	
+	sum = sum + array[i];
+	}
+	console.log("Dealer total is: " + sum);	
+}
 
 
 
-// User, dealer hands, deal hand function, hit function to check for 21, stand function, check for blackjack or check for win
+
+// Need: User/dealer hands, deal hand function, hit function to check for 21, stand function, check for blackjack or check for win
 
 
 
@@ -87,17 +107,23 @@ function newGameDeal() {
 }
 
 function hit(){
-// checking total value of cards against other 21
+// need to create a single card hit function to add to the playerHand and playerHandValue arrays
+
+// then checking total value of cards against > 21 = bust
 	
 	hitPlayer();
 }
 
 function winOrLose() {
+	
 //  checking total value of cards to see win or lose vs dealerhand
 }
 
 function stand() {
-	// 
+	// will hit dealer till >=17, if >21 dealer loses
+	console.log("stand function working")
+	sumPlayerHandValue(playerHandValue);
+	sumDealerHandValue(dealerHandValue);
 }
 
 // Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
@@ -126,6 +152,7 @@ $("#hit").click(function(){
 });
 $("#stand").click(function(){
     console.log("Stand Button Clicked.");
+    stand();
  });
     // call stand function here
 });
