@@ -37,7 +37,6 @@ GameData.buildDeck();
 
 // Deal a new hand
 function dealNewPlayerHand() {
-	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
 	console.log('dealNewPlayerHand function is working');
 	for (var i = 0; i <= 1; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
@@ -45,11 +44,10 @@ function dealNewPlayerHand() {
 	}
 	console.log(playerHandValue);
 	console.log("these are the value of the cards in playerHandValue")
-	return dealCards;
+	
 }
 
 function dealNewDealerHand() {
-	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
 	console.log("dealNewDealerHand function is working");
 	for (var i = 0; i <= 1; i++) {
 		dealerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
@@ -57,39 +55,43 @@ function dealNewDealerHand() {
 	}
 	console.log(dealerHandValue);
 	console.log("these are the value of the cards in dealerHandValue")
-	return dealCards;
+	
 }
 
 function hitPlayer() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log("hitPlayer function is working");
-	for (var i = 2; i < 3; i++) {
-		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
-		playerHandValue.push(parseInt(playerHand[i]));
+		console.log("hitPlayer function is working");
+		playerHand.push(dealCards);
+		playerHandValue.push(parseInt(dealCards));
 		
 		console.log(playerHandValue);
-	}
+		console.log("hit card is " + dealCards)
+	
 
 	
 }
 function sumPlayerHandValue(array) {
 	console.log("sumPlayerHandValue working")
-	var sum = 0;
+	var sumPlayer = 0;
 	for (var i = 0; i < playerHandValue.length; i++) {
 	
-	sum = sum + array[i];
+	sumPlayer = sumPlayer + array[i];
+
 	}
 	
-	console.log("Player total is: " + sum);	
+	
+	console.log("Player total is: " + sumPlayer);	
 }
 function sumDealerHandValue(array) {
 	console.log("sumDealerHandValue working")
-	var sum = 0;
+	var sumDealer = 0;
 	for (var i = 0; i < dealerHandValue.length; i++) {
 	
-	sum = sum + array[i];
+	sumDealer = sumDealer + array[i];
+	
 	}
-	console.log("Dealer total is: " + sum);	
+	
+	console.log("Dealer total is: " + sumDealer);	
 }
 
 
@@ -106,11 +108,13 @@ function newGameDeal() {
 	dealNewDealerHand();
 	console.log("dealer hand is " + dealerHand);
 	console.log("player hand is " + playerHand);
+	// alert("You have " + playerHand + " Dealer has " + dealerHand);
+	
 
 }
 
 function hit(){
-// need to create a single card hit function to add to the playerHand and playerHandValue arrays
+
 
 // then checking total value of cards against > 21 = bust
 	
