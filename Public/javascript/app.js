@@ -38,16 +38,13 @@ GameData.buildDeck();
 // Deal a new hand
 function dealNewPlayerHand() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
-	console.log('dealNewPlayerHand working');
+	console.log('dealNewPlayerHand function is working');
 	for (var i = 0; i <= 1; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
-		
-	playerHandValue.push(parseInt(playerHand[i]));
-
-
+		playerHandValue.push(parseInt(playerHand[i]));
 	}
-	
 	console.log(playerHandValue);
+	console.log("these are the value of the cards in playerHandValue")
 	return dealCards;
 }
 
@@ -56,31 +53,37 @@ function dealNewDealerHand() {
 	console.log("dealNewDealerHand function is working");
 	for (var i = 0; i <= 1; i++) {
 		dealerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
-		
-	dealerHandValue.push(parseInt(dealerHand[i]));
+		dealerHandValue.push(parseInt(dealerHand[i]));
 	}
-	$('#appMessage').text("You have " + playerHandValue[0] + playerHandValue[1])
 	console.log(dealerHandValue);
+	console.log("these are the value of the cards in dealerHandValue")
 	return dealCards;
 }
 
 function hitPlayer() {
 	var dealCards = GameData.deck[Math.floor(Math.random() * GameData.deck.length)];
 	console.log("hitPlayer function is working");
-	for (var i = 0; i <= 0; i++) {
+	for (var i = 2; i < 3; i++) {
 		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
+		playerHandValue.push(parseInt(playerHand[i]));
+		
+		console.log(playerHandValue);
 	}
+
 	
 }
 function sumPlayerHandValue(array) {
+	console.log("sumPlayerHandValue working")
 	var sum = 0;
 	for (var i = 0; i < playerHandValue.length; i++) {
 	
 	sum = sum + array[i];
 	}
+	
 	console.log("Player total is: " + sum);	
 }
 function sumDealerHandValue(array) {
+	console.log("sumDealerHandValue working")
 	var sum = 0;
 	for (var i = 0; i < dealerHandValue.length; i++) {
 	
@@ -121,22 +124,17 @@ function winOrLose() {
 
 function stand() {
 	// will hit dealer till >=17, if >21 dealer loses
-	console.log("stand function working")
+
+	console.log("stand button calling stand function working")
 	sumPlayerHandValue(playerHandValue);
 	sumDealerHandValue(dealerHandValue);
+
 }
 
 // Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
 function createCardsOnBoard() {
 
 }
-
-
-
-
-
-
-
 
 
 
