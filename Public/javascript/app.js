@@ -15,7 +15,7 @@ var dealerHand = [];
 var GameData = {
 	deck: [],
 	buildDeck: function() {
-		var valueOfCard = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '10jack', '10queen', '10king', '11ace'];
+		var valueOfCard = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '10_jack', '10_queen', '10_king', '11_ace'];
 		var suits = ['hearts','diamonds','spades','clubs'];
 	    
 	    for( var n = 0; n < valueOfCard.length; n++ ) {
@@ -24,7 +24,8 @@ var GameData = {
 	            	value: parseInt(valueOfCard[n]),
 	            	suit: suits[s],
 	            	player: null,
-	            	image: ("images/" + parseInt(valueOfCard[n]) + "_" + suits[s] + ".jpg"),
+	            	image: ("images/" + valueOfCard[n] + "_" + suits[s] + ".jpg"),
+	            	
 	            });
 	        }
 	    }
@@ -56,6 +57,7 @@ function dealNewPlayerHand() {
 
 		var img = document.createElement("img");
 		img.src = buildCardImage1;
+		img.onerror= playerHand.imageAlt;
 		cardLink.appendChild(img);
 		document.getElementById("playerCardsDiv").appendChild(cardLink);
 	
@@ -69,6 +71,7 @@ function dealNewPlayerHand() {
 
 		var img = document.createElement("img");
 		img.src = buildCardImage2;
+		img.onerror = playerHand.imageAlt;
 		cardLink.appendChild(img);
 		document.getElementById("playerCardsDiv").appendChild(cardLink);
 	
@@ -155,6 +158,7 @@ function hitDealer() {
 		
 		console.log("hitDealer picked this hit card " + dealerHand[2].value + " " + dealerHand[2].suit);
 		
+
 		var buildCardImage2 = dealerHand[2].image;
 	
 		var cardLink = document.createElement("a");
