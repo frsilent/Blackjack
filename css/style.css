@@ -9,7 +9,7 @@ body {
 }
 #gameBoard {
 	height: 300px;
-	width: 1000px;
+	width: 800px;
 	margin: auto;
 	border: solid 5px green;
 	display: flex;
@@ -26,7 +26,7 @@ body {
 #playerCardsDiv, #dealerCardsDiv {
 	background-color: rgba(0, 0, 0, 0.5);
 	height: 250px;
-	width: 450px;
+	width: 350px;
 	margin: 25px;
 	flex-shrink: 1;
 }
