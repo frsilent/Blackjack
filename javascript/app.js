@@ -218,17 +218,18 @@ function hitDealer() {
 
   		}, 1000);
 		
-		setTimeout(function (){
-			if (total > 21) {
+		
+		if (total > 21) {
+			setTimeout(function (){
 			confirm("Dealer Bust! You WIN!1");
 			window.location.reload();
+			}, 1000);
 		}
-  		}, 1000);
-
-  		setTimeout(function (){
-			if (playerHandTotal === dealerHandTotal) {
+  		else if (playerHandTotal === dealerHandTotal) {
+			setTimeout(function (){
 			confirm("Hands are tied, noone wins. Play again.")
 			window.location.reload();
+			}, 1000);
 		}
 		else if (playerHandTotal > dealerHandTotal && dealerHandTotal < 21) {
 			hitDealer();
@@ -249,7 +250,7 @@ function hitDealer() {
 			window.location.reload();
 			}, 1000);
 		}
-  		}, 1000);
+  		
 		
 
 }
