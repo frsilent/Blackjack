@@ -221,7 +221,7 @@ function hitDealer() {
 		
 		if (total > 21) {
 			setTimeout(function (){
-			confirm("Dealer Bust! You WIN!1");
+			confirm("Dealer Bust! You WIN!");
 			window.location.reload();
 			}, 1000);
 		}
@@ -235,18 +235,18 @@ function hitDealer() {
 			hitDealer();
 		}
 		else if (dealerHandTotal > 21) {
-			confirm("Dealer Bust! You WIN! Play again.2");
+			confirm("Dealer Bust! You WIN! Play again.");
 		}
 		else if (playerHandTotal === dealerHandTotal) {
 			confirm("Hands are tied, noone wins. Play again.");
 			window.location.reload();
 		}
 		else if (playerHandTotal > dealerHandTotal) {
-			confirm("You WIN! Play again.3");
+			confirm("You WIN! Play again.");
 		}
 		else {
 			setTimeout(function (){
-			confirm("Dealer WINS! Pay again.3")
+			confirm("Dealer WINS! Pay again.")
 			window.location.reload();
 			}, 1000);
 		}
@@ -299,12 +299,12 @@ function stand() {
 			window.location.reload();
 	}
 	if (dealerHandTotal >= 17 && playerHandTotal > dealerHandTotal) {
-			confirm("You WIN! Play again.4");
+			confirm("You WIN! Play again.");
 			window.location.reload();
 	}
 	setTimeout(function (){
 	if (dealerHandTotal >= 17 && playerHandTotal < dealerHandTotal) {
-		confirm("Dealer WINS! Play again.4");
+		confirm("Dealer WINS! Play again.");
 		window.location.reload();
 	}
 	}, 3000);
