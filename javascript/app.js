@@ -130,10 +130,10 @@ function dealNewDealerHand() {
 		document.getElementById("dealerCardsDiv").appendChild(cardLink);
 
 		total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
-	
+		dealerHandTotal = total;
 	console.log(dealerHand);
 	console.log("The value of dealerHand is: " + total)
-		if (total > 21) {
+		if (dealerHandTotal > 21) {
 			confirm("Dealer went over 21, you WIN!.");
 			window.location.reload();
 		}
@@ -151,9 +151,11 @@ function dealNewDealerHand() {
 function hitPlayer() {
 	
 		console.log("hitPlayer function is working via hit button click");
-		playerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
 		
-		var buildCardImage2 = playerHand[2].image;
+		var newCard = GameData.deck[Math.floor(Math.random() * GameData.deck.length)]
+		playerHand.push(newCard);
+		
+		
 	
 		var cardLink = document.createElement("a");
 		
@@ -161,7 +163,7 @@ function hitPlayer() {
 		cardLink.alt = "playerHand.image isnt linking to card";
 
 		var img = document.createElement("img");
-		img.src = buildCardImage2;
+		img.src = newCard.image;
 		
 		cardLink.appendChild(img);
 		document.getElementById("playerCardsDiv").appendChild(cardLink);
@@ -170,21 +172,16 @@ function hitPlayer() {
 		console.log("these are the value of the cards in playerHand")
 	
 		total = playerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
-		playerHandtotal = total;
+		playerHandTotal = total;
 
-		setTimeout(function (){
-			if (dealerHandTotal < 17) {
-			hitDealer();
-		}
-
-  		}, 1000);
+		
 		setTimeout(function (){
 		if (total > 21) {
 			confirm("Bust! You went over 21. Start another game.");
 			window.location.reload();
 		}
 		}, 1000);
-		console.log("THIS IS THE PLAYER SUM " + total);
+		console.log("THIS IS THE PLAYER TOTAL " + playerHandTotal);
 
 	
 }
@@ -192,7 +189,8 @@ function hitDealer() {
 	
 		console.log("hitDealer function is working via stand button click");
 		
-		dealerHand.push(GameData.deck[Math.floor(Math.random() * GameData.deck.length)]);
+		var newCard = GameData.deck[Math.floor(Math.random() * GameData.deck.length)]
+		dealerHand.push(newCard);
 		
 		console.log("hitDealer picked this hit card " + dealerHand[2].value + " " + dealerHand[2].suit);
 		
@@ -203,7 +201,7 @@ function hitDealer() {
 			cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 			cardLink.alt = "playerHand.image isnt linking to card";
 		var img = document.createElement("img");
-			img.src = buildCardImage2;
+			img.src = newCard.image;
 			cardLink.appendChild(img);
 		
 		document.getElementById("dealerCardsDiv").appendChild(cardLink);
@@ -222,30 +220,34 @@ function hitDealer() {
 		
 		setTimeout(function (){
 			if (total > 21) {
-			confirm("Dealer Bust! You WIN!");
+			confirm("Dealer Bust! You WIN!1");
 			window.location.reload();
 		}
   		}, 1000);
 
   		setTimeout(function (){
-			if (playerHandtotal === dealerHandTotal) {
+			if (playerHandTotal === dealerHandTotal) {
 			confirm("Hands are tied, noone wins. Play again.")
 			window.location.reload();
 		}
-		else if (playerHandtotal > dealerHandTotal && dealerHandTotal < 21) {
+		else if (playerHandTotal > dealerHandTotal && dealerHandTotal < 21) {
 			hitDealer();
 		}
 		else if (dealerHandTotal > 21) {
-			confirm("Dealer Bust! You WIN! Play again.");
+			confirm("Dealer Bust! You WIN! Play again.2");
 		}
-		else if (playerHandtotal === dealerHandTotal) {
+		else if (playerHandTotal === dealerHandTotal) {
 			confirm("Hands are tied, noone wins. Play again.");
+			window.location.reload();
 		}
-		else if (playerHandtotal > dealerHandTotal) {
-			confirm("You WIN! Play again.")
+		else if (playerHandTotal > dealerHandTotal) {
+			confirm("You WIN! Play again.3");
 		}
 		else {
-			confirm("Dealer WINS! Pay again.")
+			setTimeout(function (){
+			confirm("Dealer WINS! Pay again.3")
+			window.location.reload();
+			}, 1000);
 		}
   		}, 1000);
 		
@@ -284,24 +286,27 @@ function stand() {
 	
 	// }
 	total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
-	if (total < 17) {
+	dealerHandTotal = total;
+	setTimeout(function (){
+	if (dealerHandTotal < 17) {
 	console.log("stand button calling hitDealer function")
 	hitDealer();
 	}
-	else if (playerHandtotal === dealerHandTotal) {
-			confirm("Hands are tied, noone wins. Play again.")
-	}
-	else if (playerHandtotal > dealerHandTotal) {
-			confirm("You WIN! Play again.");
+	}, 1000);
+	if (dealerHandTotal >= 17 && playerHandTotal === dealerHandTotal) {
+			confirm("Hands are tied, noone wins. Play again.");
 			window.location.reload();
 	}
-	else {
-		confirm("Dealer WINS! Play again.");
+	if (dealerHandTotal >= 17 && playerHandTotal > dealerHandTotal) {
+			confirm("You WIN! Play again.4");
+			window.location.reload();
+	}
+	setTimeout(function (){
+	if (dealerHandTotal >= 17 && playerHandTotal < dealerHandTotal) {
+		confirm("Dealer WINS! Play again.4");
 		window.location.reload();
 	}
-
-
-	
+	}, 3000);
 }
 
 // Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
