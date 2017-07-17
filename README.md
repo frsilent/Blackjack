@@ -6,7 +6,8 @@ For my project I chose Blackjack. I created a basic version that allows the play
 ## Link to Blackjack app
 
 ## Link to Trello Board
-![Trello Board](https://trello.com/b/SPIS9jwV/wdi-project-1)
+**Trello Board:** <https://trello.com/b/SPIS9jwV/wdi-project-1>
+
 
 ## Wireframe
 ![Wireframe](http://i.imgur.com/RPxRRdV.png")
