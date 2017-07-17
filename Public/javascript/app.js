@@ -4,10 +4,12 @@ $(function(){
 // NEED TO FIX HIT CARD FOR PLAYER/DEALER NOT GIVING A NEW RANDOM CARD AFTER THE FIRST HIT
 // NEED TO CREATE IF STATEMENTS TO COMPARE VALUE OF HANDS AND DETERMINE WINNER
 // THESE STATEMENTS SHOULD CHECK FOR A BUST FIRST THEN CONTINUE IF HAND IS NOT BUSTED AND DETERMINE WINNER
-// NEED TO FIX ACE NOT BEING ABLE TO GENERATE AN IMAGE AND DETERMINE HOW TO CHANGE ACE TO A 1 WHEN NECCESSARY
+// NEED TO DETERMINE HOW TO CHANGE ACE TO A 1 WHEN NECCESSARY
 
 var playerHand = [];
 var dealerHand = [];
+var playerHandTotal = 0;
+var dealerHandTotal = 0;
 
 
 
@@ -51,7 +53,7 @@ function dealNewPlayerHand() {
 	
 		var cardLink = document.createElement("a");
 		
-		cardLink.href = "http://stackoverflow.com/questions/7932759/dom-appendchild-to-insert-images/7932803";
+		cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 		cardLink.alt = "playerHand.image isnt linking to card";
 
 
@@ -65,7 +67,7 @@ function dealNewPlayerHand() {
 	
 		var cardLink = document.createElement("a");
 		
-		cardLink.href = "http://stackoverflow.com/questions/7932759/dom-appendchild-to-insert-images/7932803";
+		cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 		cardLink.alt = "playerHand.image isnt linking to card";
 
 
@@ -74,12 +76,22 @@ function dealNewPlayerHand() {
 		img.onerror = playerHand.imageAlt;
 		cardLink.appendChild(img);
 		document.getElementById("playerCardsDiv").appendChild(cardLink);
-	
+
+		total = playerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
+		playerHandTotal = total;
+		
+		if (total === 21) {
+			setTimeout(function (){
+				confirm("BlackJack!! You WIN! Play again.");
+				window.location.reload();
+		}, 1000);
+		}
 	
 	
 	console.log(playerHand);
-	console.log("these are the value of the cards in playerHand")
+	console.log("The value of playerHand is: " + total);
 	console.log("BUILDING CARD IMAGE " + buildCardImage1 + " " + buildCardImage2);
+	console.log("playerHandTotal is: " + playerHandTotal);
 	
 }
 
@@ -93,7 +105,7 @@ function dealNewDealerHand() {
 	
 		var cardLink = document.createElement("a");
 		
-		cardLink.href = "http://stackoverflow.com/questions/7932759/dom-appendchild-to-insert-images/7932803";
+		cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 		cardLink.alt = "playerHand.image isnt linking to card";
 
 
@@ -107,7 +119,7 @@ function dealNewDealerHand() {
 	
 		var cardLink = document.createElement("a");
 		
-		cardLink.href = "http://stackoverflow.com/questions/7932759/dom-appendchild-to-insert-images/7932803";
+		cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 		cardLink.alt = "playerHand.image isnt linking to card";
 
 
@@ -116,10 +128,24 @@ function dealNewDealerHand() {
 		
 		cardLink.appendChild(img);
 		document.getElementById("dealerCardsDiv").appendChild(cardLink);
+
+		total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
 	
 	console.log(dealerHand);
-	console.log("these are the value of the cards in dealerHand")
+	console.log("The value of dealerHand is: " + total)
+		if (total > 21) {
+			confirm("Dealer went over 21, you WIN!.");
+			window.location.reload();
+		}
 	
+		dealerHandTotal = total;
+		console.log("dealerHandTotal is: " + dealerHandTotal);
+		setTimeout(function (){
+			if (total === 21) {
+			confirm("Dealer BlackJack!! You lose! Play again.");
+			window.location.reload();
+		}
+  		}, 1000);
 }
 
 function hitPlayer() {
@@ -134,7 +160,6 @@ function hitPlayer() {
 		cardLink.href = "https://code.google.com/archive/p/vector-playing-cards/";
 		cardLink.alt = "playerHand.image isnt linking to card";
 
-
 		var img = document.createElement("img");
 		img.src = buildCardImage2;
 		
@@ -145,7 +170,20 @@ function hitPlayer() {
 		console.log("these are the value of the cards in playerHand")
 	
 		total = playerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
+		playerHandtotal = total;
 
+		setTimeout(function (){
+			if (dealerHandTotal < 17) {
+			hitDealer();
+		}
+
+  		}, 1000);
+		setTimeout(function (){
+		if (total > 21) {
+			confirm("Bust! You went over 21. Start another game.");
+			window.location.reload();
+		}
+		}, 1000);
 		console.log("THIS IS THE PLAYER SUM " + total);
 
 	
@@ -171,44 +209,48 @@ function hitDealer() {
 		document.getElementById("dealerCardsDiv").appendChild(cardLink);
 		
 		total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
+		dealerHandTotal = total;
 
 		console.log("THIS IS THE DEALER SUM " + total);
+
+		setTimeout(function (){
+			if (dealerHandTotal < 17) {
+			hitDealer();
+		}
+
+  		}, 1000);
+		
+		setTimeout(function (){
+			if (total > 21) {
+			confirm("Dealer Bust! You WIN!");
+			window.location.reload();
+		}
+  		}, 1000);
+
+  		setTimeout(function (){
+			if (playerHandtotal === dealerHandTotal) {
+			confirm("Hands are tied, noone wins. Play again.")
+			window.location.reload();
+		}
+		else if (playerHandtotal > dealerHandTotal && dealerHandTotal < 21) {
+			hitDealer();
+		}
+		else if (dealerHandTotal > 21) {
+			confirm("Dealer Bust! You WIN! Play again.");
+		}
+		else if (playerHandtotal === dealerHandTotal) {
+			confirm("Hands are tied, noone wins. Play again.");
+		}
+		else if (playerHandtotal > dealerHandTotal) {
+			confirm("You WIN! Play again.")
+		}
+		else {
+			confirm("Dealer WINS! Pay again.")
+		}
+  		}, 1000);
+		
+
 }
-function sumPlayerHandValue(array) {
-	console.log("sumPlayerHandValue working")
-	var sumPlayer = 0;
-	for (var i = 0; i < playerHand.length; i++) {
-	
-	sumPlayer = sumPlayer + array[i];
-
-	}
-	
-	
-	console.log("Player total is: " + sumPlayer);	
-}
-
-
-  
-
-function sumDealerHandValue(array) {
-	console.log("sumDealerHandValue working")
-	var sumDealer = 0;
-	for (var i = 0; i < dealerHand[i].value.length; i++) {
-	
-	sumDealer = sumDealer + array[i];
-	
-	}
-	
-	console.log("Dealer total is: " + sumDealer);	
-}
-
-
-
-
-
-
-
-
 // functions new game, hit, stand
 
 function newGameDeal() {
@@ -216,9 +258,6 @@ function newGameDeal() {
 	dealNewDealerHand();
 	console.log("dealer hand is " + dealerHand);
 	console.log("player hand is " + playerHand);
-	
-	
-
 }
 
 function hit(){
@@ -228,7 +267,7 @@ function hit(){
 
 // }
 hitPlayer();
-console.log("This is the player's hit card " + playerHand[2].value + " " + playerHand[2].suit);
+
 
 // then checking total value of cards against > 21 = bust	
 }
@@ -244,19 +283,31 @@ function stand() {
 	// while (dealerHandValue < 17) {
 	
 	// }
-	console.log("stand button calling stand function working")
+	total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
+	if (total < 17) {
+	console.log("stand button calling hitDealer function")
 	hitDealer();
-	
-	
+	}
+	else if (playerHandtotal === dealerHandTotal) {
+			confirm("Hands are tied, noone wins. Play again.")
+	}
+	else if (playerHandtotal > dealerHandTotal) {
+			confirm("You WIN! Play again.");
+			window.location.reload();
+	}
+	else {
+		confirm("Dealer WINS! Play again.");
+		window.location.reload();
+	}
 
+
+	
 }
 
 // Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
 function createCardsOnBoard() {
 
 }
-
-
 
 // // Button Event Listeners
 $("#newGame").click(function(){
