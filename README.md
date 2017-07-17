@@ -4,7 +4,7 @@
 For my project I chose Blackjack. I created a basic version that allows the player/dealer to be dealt two cards and to have the choice to hit or stand. The game will compare the dealer and player hand to determine a winner.
 
 ## Link to Blackjack app
-**BlackJack** <http://embalmer-hip-12086.bitballoon.com/>
+**BlackJack** <http://blackjackjs.bitballoon.com/>
 
 ## Link to Trello Board
 **Trello Board:** <https://trello.com/b/SPIS9jwV/wdi-project-1>
