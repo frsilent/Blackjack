@@ -1,6 +1,10 @@
 
 body {
-	background-color: #37393d;
+	background-color: black;
+}
+#bgLogoDiv {
+	margin: auto;
+	text-align: center;
 }
 #bjMainHead {
 	color: white;
@@ -8,7 +12,7 @@ body {
 
 }
 #gameBoard {
-	height: 300px;
+	height: 225px;
 	width: 700px;
 	margin: auto;
 	border: solid 5px green;
@@ -25,7 +29,7 @@ body {
 }
 #playerCardsDiv, #dealerCardsDiv {
 	background-color: rgba(0, 0, 0, 0.5);
-	height: 250px;
+	height: 175px;
 	width: 300px;
 	margin: 25px;
 	flex-shrink: 1;
@@ -88,5 +92,9 @@ body {
 #buttons3 {
 	text-align: center;
 	margin: 2px;
+}
+#creator {
+	color: white;
+	text-align: center;
 }
 

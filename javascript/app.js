@@ -1,9 +1,5 @@
 $(function(){
 
-
-// NEED TO FIX HIT CARD FOR PLAYER/DEALER NOT GIVING A NEW RANDOM CARD AFTER THE FIRST HIT
-// NEED TO CREATE IF STATEMENTS TO COMPARE VALUE OF HANDS AND DETERMINE WINNER
-// THESE STATEMENTS SHOULD CHECK FOR A BUST FIRST THEN CONTINUE IF HAND IS NOT BUSTED AND DETERMINE WINNER
 // NEED TO DETERMINE HOW TO CHANGE ACE TO A 1 WHEN NECCESSARY
 
 var playerHand = [];
@@ -264,28 +260,11 @@ function newGameDeal() {
 }
 
 function hit(){
-
-// 	if (playerHandValue <= 21) {
-	
-
-// }
-hitPlayer();
-
-
-// then checking total value of cards against > 21 = bust	
-}
-
-function winOrLose() {
-	
-//  checking total value of cards to see win or lose vs dealerhand
+	hitPlayer();
 }
 
 function stand() {
-	// will hit dealer till >=17, if >21 dealer loses
 	
-	// while (dealerHandValue < 17) {
-	
-	// }
 	total = dealerHand.reduce( function(cnt,o){ return cnt + o.value; }, 0);
 	dealerHandTotal = total;
 	setTimeout(function (){
@@ -310,10 +289,6 @@ function stand() {
 	}, 3000);
 }
 
-// Generate card function: pulling from the player/dealer hands and creating the dom version of the card/
-function createCardsOnBoard() {
-
-}
 
 // // Button Event Listeners
 $("#newGame").click(function(){
